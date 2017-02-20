@@ -27,27 +27,13 @@ repositories {
     }
 }
 
-//configurations {
-//    lintChecks
-//}
-
 dependencies {
-//    compile files('libs/lint-api-25.2.3.jar')
-//    compile 'com.android.tools.lint:lint-api:25.2.3'
-//    compile 'com.android.tools.lint:lint-checks:25.2.3'
-//    testCompile 'junit:junit:4.11'
-//    testCompile 'com.android.tools.lint:lint:25.2.3'
-//    testCompile 'com.android.tools.lint:lint-tests:25.2.3'
-//    testCompile 'com.android.tools:testutils:25.2.3'
-//    compile files('libs/lint-api-25.2.3.jar')
     compile 'com.android.tools.lint:lint-api:25.2.3'
     compile 'com.android.tools.lint:lint-checks:25.2.3'
     testCompile 'junit:junit:4.11'
     testCompile 'com.android.tools.lint:lint:25.2.3'
     testCompile 'com.android.tools.lint:lint-tests:25.2.3'
     testCompile 'com.android.tools:testutils:25.2.3'
-
-//    lintChecks files(jar)
 }
 
 jar {
@@ -55,7 +41,6 @@ jar {
     manifest {
         attributes("Lint-Registry": "com.cch_lab.java.android.lint.study.SrpPracticeIssueRegistry")
     }
-//    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 }
 
 defaultTasks 'assemble'
