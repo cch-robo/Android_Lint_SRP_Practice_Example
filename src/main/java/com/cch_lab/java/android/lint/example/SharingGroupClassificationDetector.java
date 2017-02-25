@@ -35,7 +35,7 @@ public class SharingGroupClassificationDetector extends Detector implements Dete
     public static final Issue SEPARATE_BY_ISOLATED_GROUP_ISSUE = Issue.create(
             "IsolatedSharingWriteFieldsClassification",
             "変更するフィールド値(状態)の共有度から、メソッド責務が完全共有かつ唯一と判断しました。",
-            "変更の共有度によるメソッドグループのメソッド利用先確認提案",
+            "変更の共有度によるメソッドグループの変更状態分割提案",
             Category.CORRECTNESS,
             4,
             Severity.INFORMATIONAL
@@ -191,7 +191,7 @@ public class SharingGroupClassificationDetector extends Detector implements Dete
      * <li>変更するフィールド変数(状態)を持っていないメソッドである。<br/> ⇒ 関数なので対象外</li>
      * <li>変更するフィールド変数(状態)を持っているクラスで唯一のメソッドである。<br/> ⇒ 単一責務の原則を満たしているので対象外</li>
      * <li>複合責務であるが、共有度100％の他メソッドがなく、かつ 0% < 共有度 < 100% の他メソッドもない。<br/> ⇒ メソッド単独を別のクラスに分離することを勧める</li>
-     * <li>複合責務であるが、共有度100％の他メソッドがあり、かつ 0% < 共有度 < 100% の他メソッドもなく、クラスで唯一の状態変更メソッドグループである。<br/> ⇒ メソッドの利用先の責務確認を促す</li>
+     * <li>複合責務であるが、共有度100％の他メソッドがあり、かつ 0% < 共有度 < 100% の他メソッドもなく、クラスで唯一の状態変更メソッドグループである。<br/> ⇒ メソッドの利用先の責務確認と状態の分割を勧める</li>
      * <li>複合責務であるが、共有度100％の他メソッドがあり、かつ 0% < 共有度 < 100% の他メソッドがないが、クラスに他の状態変更メソッドがある。<br/>⇒ メソッドのグループを別のクラスに分離することを勧める</li>
      * <li>複合責務である上、共有度１００％と0%の他メソッドがなく、0% < 共有度 < 100% の他メソッドしかない。<br/> ⇒ 責務混在メソッドなので、先ずはメソッドの分解や統合を勧める</li>
      * </ol>
@@ -396,9 +396,9 @@ public class SharingGroupClassificationDetector extends Detector implements Dete
             String groups = getSharedMethodNames(groupMethods);
             String fieldNames = getWriteFieldNames(method);
             String message = "メソッドが変更するフィールド変数(状態)は、他のメソッドと完全共有かつクラス唯一です。\n"
-                    + "これはメソッドの責務(役割)が共有されていますが、責務独立したクラスであることを示すので、\n"
+                    + "これはメソッドの責務(役割)が共有されている、責務合体したクラスであることを示すので、\n"
                     + "他のメソッド " + groups + " と共に、"
-                    + "メソッドの利用先が適切であるか確認してください。\n"
+                    + "メソッドの利用先が適切であるかを確認して、変更するフイールド変数(状態)の分割をおすすめします。\n"
                     + fieldNames;
             Location location = Location.create(mContext.file, contents, startOffset, endOffset);
 
@@ -415,7 +415,7 @@ public class SharingGroupClassificationDetector extends Detector implements Dete
             String message = "メソッドが変更するフィールド変数(状態)は、他のメソッドと完全共有ですがクラス唯一でありません。\n"
                     + "これはメソッドの責務(役割)が共有されていますが、責務混在したクラスであることを示すので、\n"
                     + "他のメソッド " + groups + " と、"
-                    + "メソッドが変更するフィールド変数(状態)ごと新クラスに分離してください。\n"
+                    + "メソッドが変更するフィールド変数(状態)ごと新クラスへの分離をおすすめします。\n"
                     + fieldNames;
             Location location = Location.create(mContext.file, contents, startOffset, endOffset);
 
@@ -444,7 +444,7 @@ public class SharingGroupClassificationDetector extends Detector implements Dete
             String fieldNames = getWriteFieldNames(method);
             String message = "メソッドが変更するフィールド変数(状態)は、他のメソッドと完全独立しています。\n"
                     + "これはメソッドの責務(役割)が独立していることを示すので、\n"
-                    + "メソッドが変更するフィールド変数(状態)ごと新クラスに分離できます。\n"
+                    + "メソッドが変更するフィールド変数(状態)ごと新クラスへの分離をおすすめします。\n"
                     + fieldNames;
             Location location = Location.create(mContext.file, contents, startOffset, endOffset);
 
