@@ -34,9 +34,9 @@ import java.util.Map;
 public class MultiFunctionFlagStructureDetector extends Detector implements Detector.JavaPsiScanner {
     public static final Issue ISSUE = Issue.create(
             "MultiFunctionFlagStructure",
+            "boolean フラグ引数によるメソッドの複数機能提供問題",
             "メソッド引数の boolean フラグによる処理切り替えで、フィールド値(状態)を変更しています。\n"
                     +"メソッドは、多重の責務(役割)を提供しています。メソッドの分割を検討してください。",
-            "boolean フラグ引数によるメソッドの複数機能提供問題",
             Category.CORRECTNESS,
             4,
             Severity.WARNING,

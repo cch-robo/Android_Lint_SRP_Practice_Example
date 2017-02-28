@@ -108,8 +108,8 @@ import java.util.List;
 public class PsiClassStructureDetector extends Detector implements Detector.JavaPsiScanner {
     public static final Issue ISSUE = Issue.create(
             "PsiClassStructureReport",
-            "Java ソースのASTからクラス内の情報を出力するサンプルです。",
             "Java ソースのASTからクラス内の情報を出力するのみでIssueをレポートしません。",
+            "Java ソースのASTからクラス内の情報を出力するサンプルです。",
             Category.CORRECTNESS,
             4,
             Severity.INFORMATIONAL,

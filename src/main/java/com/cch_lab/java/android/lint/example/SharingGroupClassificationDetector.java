@@ -34,8 +34,8 @@ import java.util.Set;
 public class SharingGroupClassificationDetector extends Detector implements Detector.JavaPsiScanner {
     public static final Issue SEPARATE_BY_ISOLATED_GROUP_ISSUE = Issue.create(
             "IsolatedSharingWriteFieldsClassification",
-            "変更するフィールド値(状態)の共有度から、メソッド責務が完全共有かつ唯一と判断しました。",
             "変更の共有度によるメソッドグループの変更状態分割提案",
+            "変更するフィールド値(状態)の共有度から、メソッド責務が完全共有かつ唯一と判断しました。",
             Category.CORRECTNESS,
             4,
             Severity.INFORMATIONAL
@@ -46,8 +46,8 @@ public class SharingGroupClassificationDetector extends Detector implements Dete
 
     public static final Issue SEPARATE_BY_GROUP_ISSUE = Issue.create(
             "SharingWriteFieldsClassification",
-            "変更するフィールド値(状態)の共有度から、メソッド責務が完全共有かつ唯一でないと判断しました。",
             "変更の共有度によるメソッドグループのクラス分離提案",
+            "変更するフィールド値(状態)の共有度から、メソッド責務が完全共有かつ唯一でないと判断しました。",
             Category.CORRECTNESS,
             4,
             Severity.INFORMATIONAL
@@ -58,8 +58,8 @@ public class SharingGroupClassificationDetector extends Detector implements Dete
 
     public static final Issue SEPARATE_BY_SINGLE_ISSUE = Issue.create(
             "SingleWriteFieldsClassification",
-            "変更するフィールド値(状態)の共有度から、メソッド責務が完全独立と判断しました。",
             "変更の共有度によるメソッドのクラス分離提案",
+            "変更するフィールド値(状態)の共有度から、メソッド責務が完全独立と判断しました。",
             Category.CORRECTNESS,
             4,
             Severity.INFORMATIONAL,
@@ -69,8 +69,8 @@ public class SharingGroupClassificationDetector extends Detector implements Dete
 
     public static final Issue TRY_SEPARATE_BY_ROLE_ISSUE = Issue.create(
             "MixedWriteFieldsClassification",
-            "変更するフィールド値(状態)の共有度から、メソッド責務が他と混合していると判断しました。",
             "変更の共有度によるメソッドの責務混合問題",
+            "変更するフィールド値(状態)の共有度から、メソッド責務が他と混合していると判断しました。",
             Category.CORRECTNESS,
             4,
             Severity.WARNING,
