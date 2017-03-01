@@ -37,7 +37,7 @@ dependencies {
 }
 
 jar {
-    archiveName 'lint-srp−example.jar'
+    archiveName 'lint-srp-example.jar'
     manifest {
         attributes("Lint-Registry": "com.cch_lab.java.android.lint.example.SrpPracticeIssueRegistry")
     }
