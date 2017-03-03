@@ -3,6 +3,7 @@ package com.cch_lab.java.android.lint.example;
 import com.android.annotations.NonNull;
 import com.android.tools.lint.detector.api.Category;
 import com.android.tools.lint.detector.api.Context;
+import com.android.tools.lint.detector.api.DefaultPosition;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
@@ -21,6 +22,7 @@ import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiIdentifier;
 import com.intellij.psi.PsiMethod;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -400,7 +402,7 @@ public class SharingGroupClassificationDetector extends Detector implements Dete
                     + "他のメソッド " + groups + " と共に、"
                     + "メソッドの利用先が適切であるかを確認して、変更するフイールド変数(状態)の分割をおすすめします。\n"
                     + fieldNames;
-            Location location = Location.create(mContext.file, contents, startOffset, endOffset);
+            Location location = createLocation(mContext.file, contents, startOffset, endOffset);
 
             mContext.report(SEPARATE_BY_ISOLATED_GROUP_ISSUE, location, message);
             Debug.report("SeparateByIsolateGroup", method);
@@ -417,7 +419,7 @@ public class SharingGroupClassificationDetector extends Detector implements Dete
                     + "他のメソッド " + groups + " と、"
                     + "メソッドが変更するフィールド変数(状態)ごと新クラスへの分離をおすすめします。\n"
                     + fieldNames;
-            Location location = Location.create(mContext.file, contents, startOffset, endOffset);
+            Location location = createLocation(mContext.file, contents, startOffset, endOffset);
 
             mContext.report(SEPARATE_BY_GROUP_ISSUE, location, message);
             Debug.report("SeparateByGroup", method);
@@ -446,7 +448,7 @@ public class SharingGroupClassificationDetector extends Detector implements Dete
                     + "これはメソッドの責務(役割)が独立していることを示すので、\n"
                     + "メソッドが変更するフィールド変数(状態)ごと新クラスへの分離をおすすめします。\n"
                     + fieldNames;
-            Location location = Location.create(mContext.file, contents, startOffset, endOffset);
+            Location location = createLocation(mContext.file, contents, startOffset, endOffset);
 
             mContext.report(SEPARATE_BY_SINGLE_ISSUE, location, message);
             Debug.report("SeparateBySingle", method);
@@ -468,10 +470,33 @@ public class SharingGroupClassificationDetector extends Detector implements Dete
                     + "これはメソッドの責務(役割)が明確に区別されておらず、責務(役割)が混在していることを示すので、\n"
                     + "先ずはメソッドや変更フィールド変数(状態)の分割や統合をおすすめします。\n"
                     + fieldNames;
-            Location location = Location.create(mContext.file, contents, startOffset, endOffset);
+            Location location = createLocation(mContext.file, contents, startOffset, endOffset);
 
             mContext.report(TRY_SEPARATE_BY_ROLE_ISSUE, location, message);
             Debug.report("TrySeparateByRole", method);
+        }
+
+        private Location createLocation(@NonNull File file, @NonNull String contents, int startOffset, int endOffset) {
+            DefaultPosition startPosition = new DefaultPosition(
+                    getLineNumber(contents, startOffset), getColumnNumber(contents, startOffset), startOffset);
+
+            DefaultPosition endPosition = new DefaultPosition(
+                    getLineNumber(contents, endOffset), getColumnNumber(contents, endOffset), endOffset);
+
+            return Location.create(mContext.file, startPosition, endPosition);
+        }
+        private int getLineNumber(@NonNull String contents, int offset) {
+            // this li1ne number is 0 base.
+            String preContents = contents.substring(0, offset);
+            String remContents = preContents.replaceAll("\n", "");
+            return  preContents.length() - remContents.length();
+        }
+        private int getColumnNumber(@NonNull String contents, int offset) {
+            // this column number is 0 base.
+            String preContents = contents.substring(0, offset);
+            String[] preLines = preContents.split("\n");
+            int lastIndex = preLines.length -1;
+            return preContents.endsWith("\n") ? 0 : preLines[lastIndex].length();
         }
 
         private String getWriteFieldNames(@NonNull WriteFieldGroupMethod method) {

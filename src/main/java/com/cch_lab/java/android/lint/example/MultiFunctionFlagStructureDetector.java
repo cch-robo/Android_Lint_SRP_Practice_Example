@@ -3,6 +3,7 @@ package com.cch_lab.java.android.lint.example;
 import com.android.annotations.NonNull;
 import com.android.tools.lint.detector.api.Category;
 import com.android.tools.lint.detector.api.Context;
+import com.android.tools.lint.detector.api.DefaultPosition;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
@@ -25,6 +26,7 @@ import com.intellij.psi.PsiParameter;
 import com.intellij.psi.PsiStatement;
 import com.intellij.psi.PsiType;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -313,12 +315,35 @@ public class MultiFunctionFlagStructureDetector extends Detector implements Dete
                 String message = "メソッドのbooleanパラメータで、クラスの状態変更を切り替えています。\n"
                         + "多重責務(役割)のメソッドは、テスタビリティを下げるので、"
                         + "ifブロック処理を別メソッドに分離することをおすすめします。";
-                Location location = Location.create(mContext.file, contents, startOffset, endOffset);
+                Location location = createLocation(mContext.file, contents, startOffset, endOffset);
 
                 mContext.report(ISSUE, location, message);
                 Debug.report(startOffset, endOffset, contents, mFlagLogic);
             }
 
+        }
+
+        private Location createLocation(@NonNull File file, @NonNull String contents, int startOffset, int endOffset) {
+            DefaultPosition startPosition = new DefaultPosition(
+                    getLineNumber(contents, startOffset), getColumnNumber(contents, startOffset), startOffset);
+
+            DefaultPosition endPosition = new DefaultPosition(
+                    getLineNumber(contents, endOffset), getColumnNumber(contents, endOffset), endOffset);
+
+            return Location.create(mContext.file, startPosition, endPosition);
+        }
+        private int getLineNumber(@NonNull String contents, int offset) {
+            // this li1ne number is 0 base.
+            String preContents = contents.substring(0, offset);
+            String remContents = preContents.replaceAll("\n", "");
+            return  preContents.length() - remContents.length();
+        }
+        private int getColumnNumber(@NonNull String contents, int offset) {
+            // this column number is 0 base.
+            String preContents = contents.substring(0, offset);
+            String[] preLines = preContents.split("\n");
+            int lastIndex = preLines.length -1;
+            return preContents.endsWith("\n") ? 0 : preLines[lastIndex].length();
         }
 
         private static class Debug {
