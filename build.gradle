@@ -33,6 +33,11 @@ dependencies {
     testCompile 'com.android.tools:testutils:25.3.0'
 }
 
+// for windows environment at MS932
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 jar {
     archiveName 'lint-srp-example.jar'
     manifest {
