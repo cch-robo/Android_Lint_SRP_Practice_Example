@@ -10,7 +10,6 @@ public class SrpPracticeIssueRegistry extends IssueRegistry {
     @Override
     public List<Issue> getIssues() {
         return Arrays.asList(
-                MultiFunctionFlagStructureDetector.ISSUE,
                 SharingGroupClassificationDetector.SEPARATE_BY_ISOLATED_GROUP_ISSUE,
                 SharingGroupClassificationDetector.SEPARATE_BY_GROUP_ISSUE,
                 SharingGroupClassificationDetector.SEPARATE_BY_SINGLE_ISSUE,
