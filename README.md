@@ -6,16 +6,15 @@ DAY.01 (Mar 9th, 2017)
 インスペクションとAndroid Lint Custome Ruleによる、単一責任実装の実践 のサンプル・プロジェクトです。
 
 ## インスペクションについて
-Android Studio には、<font color="blue">インスペクション</font>という強力なソース解析(指摘)機能があります。
+Android Studio には、**インスペクション**という強力なソース解析(指摘)機能があります。
 
 1. 問題点のある実装部をエディタ上でハイライト表示します。
 
 1. Analyze メニューの"Inspect Code..."により、
-指摘一覧を <font color="blue">Inspection Resultsツールウィンドウ</font> にカテゴリ別でリストアップしてくれます。
+指摘一覧を **Inspection Resultsツールウィンドウ** にカテゴリ別でリストアップしてくれます。
 
-<font color="blue">Inspection Resultsツールウィンドウ</font> に、Android Lint のチェック項目が反映されていることに気づかれていますでしょうか。
-
-Android Studio のインスペクションには、<font color="blue">Android Lint も利用されている</font>のです。
+**Inspection Resultsツールウィンドウ** に、Android Lint のチェック項目が反映されていることに気づかれていますでしょうか。
+Android Studio のインスペクションには、**Android Lint も利用されている**のです。
 
 ## サンプル・プロジェクトの紹介
 このサンプル・プロジェクトは、  
@@ -26,31 +25,20 @@ Android Studio のインスペクションには、<font color="blue">Android Li
 複数存在（複合責務）する場合、その共有度合いから  
 責務(役割)の混在の種類と問題についてレポートします。
 
-<br/>
-
-<center>
-<img src="doc/custom-srp-lint-popup.png" width="480px" border="1" /><br/>
-(fig-1 Editor Inspection)
-</center>
 - 責務複合メソッドに対し<font color="blue">インスペクション</font>により、  
 エディタ上でメソッド名がハイライト表示され、  
-マウスオーバーで問題点のレポートが確認できます。
+マウスオーバーで問題点のレポートが確認できます。  
+<img src="doc/custom-srp-lint-popup.png" width="480px" border="1" />
 
-<br/>
-
-<center>
-<img src="doc/analyze-inspection-code.png" width="380px" border="1" /><br/>
-(fig-2 Analyze Inspection)
-</center>
 - Analyze ⇒ Inspect code... で、  
-プロジェクト内に存在する問題(責務複合メソッド)箇所の一覧が確認できます。
+プロジェクト内に存在する問題(責務複合メソッド)箇所の一覧が確認できます。 
+<img src="doc/analyze-inspection-code.png" width="380px" border="1" />
 
-<br/>
 
 ## 利用方法
 - プロジェクト内のディレクトリ  
-<font color="blue">supplementary</font> にある <font color="blue">lint-srp-example.jar</font> を  
-<i>USER NAME</i>/.android/lint ディレクトリにコピーすれば  
+**supplementary** にある **lint-srp-example.jar** を  
+*USER NAME*/.android/lint ディレクトリにコピーすれば  
 Android Studio からサンプル機能が利用可能になります。
 
 
@@ -65,11 +53,10 @@ $ cp lint-srp-example.jar ~/.android/lint
 > copy lint-srp-example.jar .android&yen;lint</code></pre>
 
 ## 制限事項
-<font color="red">注意：</font>
+**注意：**
 サンプル・プロジェクトでは、  
-Javaソース探索に<font
- color="blue">JavaPsiScanner</font>、  
-Javaソース解析に<font color="blue">JavaElementVisitor</font> を使うため、  
+Javaソース探索に **JavaPsiScanner**、  
+Javaソース解析に **JavaElementVisitor** を使うため、  
 以下の制限があります。  
 
 - com.intellij.psi の AST パッケージを使っています。
