@@ -13,7 +13,7 @@ Android Studio には、**インスペクション**という強力なソース�
 1. Analyze メニューの"Inspect Code..."により、
 指摘一覧を **Inspection Resultsツールウィンドウ** にカテゴリ別でリストアップしてくれます。
 
-**Inspection Resultsツールウィンドウ** に、Android Lint のチェック項目が反映されていることに気づかれていますでしょうか。
+**Inspection Resultsツールウィンドウ** に、Android Lint のチェック項目が反映されていることに気づかれていますでしょうか。  
 Android Studio のインスペクションには、**Android Lint も利用されている**のです。
 
 ## サンプル・プロジェクトの紹介
