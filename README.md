@@ -3,7 +3,7 @@
 DAY.01 (Mar 9th, 2017)  
 12:40 - JA 30min Room 1  
 開発環境・ツール (Productivity and Tooling)  
-インスペクションとAndroid Lint Custome Ruleによる、単一責任実装の実践 のサンプル・プロジェクトです。
+インスペクションとAndroid Lint Custom Ruleによる、単一責任実装の実践 のサンプル・プロジェクトです。
 
 ## インスペクションについて
 Android Studio には、**インスペクション**という強力なソース解析(指摘)機能があります。
@@ -19,7 +19,7 @@ Android Studio のインスペクションには、**Android Lint も利用さ�
 ## サンプル・プロジェクトの紹介
 このサンプル・プロジェクトは、  
 単一責任となるシンプルな実装の強制(強要)を促す、  
-オリジナル Android	Lint Custome Rule のプロジェクトです。
+オリジナル Android	Lint Custom Rule のプロジェクトです。
 
 フィールド変数（状態）を変更するメソッドが、  
 複数存在（複合責務）する場合、その共有度合いから  
