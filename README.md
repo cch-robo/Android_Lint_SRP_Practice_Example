@@ -78,3 +78,8 @@ Javaソース解析に **JavaElementVisitor** を使うため、
 
 - 一部の環境では、日本語出力が文字化けします。  
 *Ubuntu 16.04 LTS Android Studio 2.2 において、Inspection Results ツールウィンドウの右ペイン・メッセージで文字化けを確認しています。*
+
+### 補足  
+プロジェクト内のディレクトリ **supplementary** に、 
+発表スライド **Android-Lint-SRP-Practice.pdf** を添付いたしました。  
+よろしければ、ご利用ください。
